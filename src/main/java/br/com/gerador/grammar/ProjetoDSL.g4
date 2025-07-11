@@ -4,22 +4,36 @@ grammar ProjetoDSL;
 package br.com.gerador.grammar;
 }
 
-file        : serviceDecl+ ;
+file: serviceDecl+;
 
-serviceDecl : 'service' ID '{' entityDecl+ '}' ;
+serviceDecl: 'service' ID '{' entityDecl+ '}';
 
-entityDecl  : 'entity' ID '{' fieldDecl+ '}' ;
+entityDecl: 'entity' ID '{' fieldDecl+ '}';
 
-fieldDecl   : ID ':' type option? validation? ;
+fieldDecl: ID ':' type option? validation?;
 
-type        : 'string' | 'uuid' | 'integer' ;
+type:
+	'string'
+	| 'uuid'
+	| 'integer'
+	| 'long'
+	| 'double'
+	| 'boolean'
+	| 'date'
+	| 'datetime'
+	| 'decimal';
 
-option      : '?' ;
+option: '?';
 
-validation  : 'min(' INT ',' STRING ')' ;
+validation:
+	'min(' INT ',' STRING ')'
+	| 'max(' INT ')'
+	| 'notNull'
+	| 'notBlank';
 
-ID          : [a-zA-Z_][a-zA-Z_0-9]* ;
-INT         : [0-9]+ ;
-STRING      : '"' (~["\\] | '\\' .)* '"' ;
+ID: [a-zA-Z_][a-zA-Z_0-9]*;
+INT: [0-9]+;
+STRING: '"' (~["\\] | '\\' .)* '"';
 
-WS          : [ \t\r\n]+ -> skip ;
+WS: [ \t\r\n]+ -> skip;
+COMMENT: '//' ~[\r\n]* -> skip;

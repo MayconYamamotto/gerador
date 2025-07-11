@@ -20,7 +20,9 @@ public class ProjetoDSLParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, T__11=12, ID=13, INT=14, STRING=15, WS=16;
+		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
+		T__17=18, T__18=19, T__19=20, T__20=21, ID=22, INT=23, STRING=24, WS=25, 
+		COMMENT=26;
 	public static final int
 		RULE_file = 0, RULE_serviceDecl = 1, RULE_entityDecl = 2, RULE_fieldDecl = 3, 
 		RULE_type = 4, RULE_option = 5, RULE_validation = 6;
@@ -34,14 +36,16 @@ public class ProjetoDSLParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'service'", "'{'", "'}'", "'entity'", "':'", "'string'", "'uuid'", 
-			"'integer'", "'?'", "'min('", "','", "')'"
+			"'integer'", "'long'", "'double'", "'boolean'", "'date'", "'datetime'", 
+			"'decimal'", "'?'", "'min('", "','", "')'", "'max('", "'notNull'", "'notBlank'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, "ID", "INT", "STRING", "WS"
+			null, null, null, null, null, null, null, null, null, null, "ID", "INT", 
+			"STRING", "WS", "COMMENT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -343,7 +347,7 @@ public class ProjetoDSLParser extends Parser {
 			setState(43);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__8) {
+			if (_la==T__14) {
 				{
 				setState(42);
 				option();
@@ -353,7 +357,7 @@ public class ProjetoDSLParser extends Parser {
 			setState(46);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__9) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 3735552L) != 0)) {
 				{
 				setState(45);
 				validation();
@@ -403,7 +407,7 @@ public class ProjetoDSLParser extends Parser {
 			{
 			setState(48);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 448L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 32704L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -452,7 +456,7 @@ public class ProjetoDSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(50);
-			match(T__8);
+			match(T__14);
 			}
 		}
 		catch (RecognitionException re) {
@@ -493,18 +497,51 @@ public class ProjetoDSLParser extends Parser {
 		ValidationContext _localctx = new ValidationContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_validation);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(52);
-			match(T__9);
-			setState(53);
-			match(INT);
-			setState(54);
-			match(T__10);
-			setState(55);
-			match(STRING);
-			setState(56);
-			match(T__11);
+			setState(62);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__15:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(52);
+				match(T__15);
+				setState(53);
+				match(INT);
+				setState(54);
+				match(T__16);
+				setState(55);
+				match(STRING);
+				setState(56);
+				match(T__17);
+				}
+				break;
+			case T__18:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(57);
+				match(T__18);
+				setState(58);
+				match(INT);
+				setState(59);
+				match(T__17);
+				}
+				break;
+			case T__19:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(60);
+				match(T__19);
+				}
+				break;
+			case T__20:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(61);
+				match(T__20);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -519,7 +556,7 @@ public class ProjetoDSLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0010;\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u001aA\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0001\u0000\u0004\u0000\u0010"+
 		"\b\u0000\u000b\u0000\f\u0000\u0011\u0001\u0001\u0001\u0001\u0001\u0001"+
@@ -529,32 +566,36 @@ public class ProjetoDSLParser extends Parser {
 		"\u0001\u0003\u0001\u0003\u0001\u0003\u0003\u0003,\b\u0003\u0001\u0003"+
 		"\u0003\u0003/\b\u0003\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005"+
 		"\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006"+
+		"\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0003\u0006?\b\u0006"+
 		"\u0001\u0006\u0000\u0000\u0007\u0000\u0002\u0004\u0006\b\n\f\u0000\u0001"+
-		"\u0001\u0000\u0006\b8\u0000\u000f\u0001\u0000\u0000\u0000\u0002\u0013"+
+		"\u0001\u0000\u0006\u000eA\u0000\u000f\u0001\u0000\u0000\u0000\u0002\u0013"+
 		"\u0001\u0000\u0000\u0000\u0004\u001d\u0001\u0000\u0000\u0000\u0006\'\u0001"+
 		"\u0000\u0000\u0000\b0\u0001\u0000\u0000\u0000\n2\u0001\u0000\u0000\u0000"+
-		"\f4\u0001\u0000\u0000\u0000\u000e\u0010\u0003\u0002\u0001\u0000\u000f"+
+		"\f>\u0001\u0000\u0000\u0000\u000e\u0010\u0003\u0002\u0001\u0000\u000f"+
 		"\u000e\u0001\u0000\u0000\u0000\u0010\u0011\u0001\u0000\u0000\u0000\u0011"+
 		"\u000f\u0001\u0000\u0000\u0000\u0011\u0012\u0001\u0000\u0000\u0000\u0012"+
 		"\u0001\u0001\u0000\u0000\u0000\u0013\u0014\u0005\u0001\u0000\u0000\u0014"+
-		"\u0015\u0005\r\u0000\u0000\u0015\u0017\u0005\u0002\u0000\u0000\u0016\u0018"+
-		"\u0003\u0004\u0002\u0000\u0017\u0016\u0001\u0000\u0000\u0000\u0018\u0019"+
-		"\u0001\u0000\u0000\u0000\u0019\u0017\u0001\u0000\u0000\u0000\u0019\u001a"+
-		"\u0001\u0000\u0000\u0000\u001a\u001b\u0001\u0000\u0000\u0000\u001b\u001c"+
-		"\u0005\u0003\u0000\u0000\u001c\u0003\u0001\u0000\u0000\u0000\u001d\u001e"+
-		"\u0005\u0004\u0000\u0000\u001e\u001f\u0005\r\u0000\u0000\u001f!\u0005"+
-		"\u0002\u0000\u0000 \"\u0003\u0006\u0003\u0000! \u0001\u0000\u0000\u0000"+
-		"\"#\u0001\u0000\u0000\u0000#!\u0001\u0000\u0000\u0000#$\u0001\u0000\u0000"+
-		"\u0000$%\u0001\u0000\u0000\u0000%&\u0005\u0003\u0000\u0000&\u0005\u0001"+
-		"\u0000\u0000\u0000\'(\u0005\r\u0000\u0000()\u0005\u0005\u0000\u0000)+"+
-		"\u0003\b\u0004\u0000*,\u0003\n\u0005\u0000+*\u0001\u0000\u0000\u0000+"+
-		",\u0001\u0000\u0000\u0000,.\u0001\u0000\u0000\u0000-/\u0003\f\u0006\u0000"+
-		".-\u0001\u0000\u0000\u0000./\u0001\u0000\u0000\u0000/\u0007\u0001\u0000"+
-		"\u0000\u000001\u0007\u0000\u0000\u00001\t\u0001\u0000\u0000\u000023\u0005"+
-		"\t\u0000\u00003\u000b\u0001\u0000\u0000\u000045\u0005\n\u0000\u000056"+
-		"\u0005\u000e\u0000\u000067\u0005\u000b\u0000\u000078\u0005\u000f\u0000"+
-		"\u000089\u0005\f\u0000\u00009\r\u0001\u0000\u0000\u0000\u0005\u0011\u0019"+
-		"#+.";
+		"\u0015\u0005\u0016\u0000\u0000\u0015\u0017\u0005\u0002\u0000\u0000\u0016"+
+		"\u0018\u0003\u0004\u0002\u0000\u0017\u0016\u0001\u0000\u0000\u0000\u0018"+
+		"\u0019\u0001\u0000\u0000\u0000\u0019\u0017\u0001\u0000\u0000\u0000\u0019"+
+		"\u001a\u0001\u0000\u0000\u0000\u001a\u001b\u0001\u0000\u0000\u0000\u001b"+
+		"\u001c\u0005\u0003\u0000\u0000\u001c\u0003\u0001\u0000\u0000\u0000\u001d"+
+		"\u001e\u0005\u0004\u0000\u0000\u001e\u001f\u0005\u0016\u0000\u0000\u001f"+
+		"!\u0005\u0002\u0000\u0000 \"\u0003\u0006\u0003\u0000! \u0001\u0000\u0000"+
+		"\u0000\"#\u0001\u0000\u0000\u0000#!\u0001\u0000\u0000\u0000#$\u0001\u0000"+
+		"\u0000\u0000$%\u0001\u0000\u0000\u0000%&\u0005\u0003\u0000\u0000&\u0005"+
+		"\u0001\u0000\u0000\u0000\'(\u0005\u0016\u0000\u0000()\u0005\u0005\u0000"+
+		"\u0000)+\u0003\b\u0004\u0000*,\u0003\n\u0005\u0000+*\u0001\u0000\u0000"+
+		"\u0000+,\u0001\u0000\u0000\u0000,.\u0001\u0000\u0000\u0000-/\u0003\f\u0006"+
+		"\u0000.-\u0001\u0000\u0000\u0000./\u0001\u0000\u0000\u0000/\u0007\u0001"+
+		"\u0000\u0000\u000001\u0007\u0000\u0000\u00001\t\u0001\u0000\u0000\u0000"+
+		"23\u0005\u000f\u0000\u00003\u000b\u0001\u0000\u0000\u000045\u0005\u0010"+
+		"\u0000\u000056\u0005\u0017\u0000\u000067\u0005\u0011\u0000\u000078\u0005"+
+		"\u0018\u0000\u00008?\u0005\u0012\u0000\u00009:\u0005\u0013\u0000\u0000"+
+		":;\u0005\u0017\u0000\u0000;?\u0005\u0012\u0000\u0000<?\u0005\u0014\u0000"+
+		"\u0000=?\u0005\u0015\u0000\u0000>4\u0001\u0000\u0000\u0000>9\u0001\u0000"+
+		"\u0000\u0000><\u0001\u0000\u0000\u0000>=\u0001\u0000\u0000\u0000?\r\u0001"+
+		"\u0000\u0000\u0000\u0006\u0011\u0019#+.>";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
