@@ -4,11 +4,11 @@ Este diretório contém scripts para automatizar o processo de geração de cód
 
 ## Scripts Disponíveis
 
-### 🔧 `gera-antlr.sh`
+### 🔧 `gerar-antlr.sh`
 Gera os arquivos Java do parser ANTLR a partir da gramática.
 
 ```bash
-./gera-antlr.sh
+./gerar-antlr.sh
 ```
 
 ### 🔨 `compila.sh`
@@ -18,16 +18,16 @@ Compila todo o projeto usando Maven.
 ./compila.sh
 ```
 
-### 🚀 `gera-dsl.sh`
+### 🚀 `gerar-dsl.sh`
 Executa o gerador DSL para processar um arquivo específico.
 
 ```bash
 # Usar arquivo padrão (Teste.dsl)
-./gera-dsl.sh
+./gerar-dsl.sh
 
 # Usar arquivo específico
-./gera-dsl.sh exemplos/sistema-vendas.dsl
-./gera-dsl.sh exemplos/blog-pessoal.dsl
+./gerar-dsl.sh exemplos/sistema-vendas.dsl
+./gerar-dsl.sh exemplos/blog-pessoal.dsl
 ```
 
 ### 🏗️ `build-all.sh`

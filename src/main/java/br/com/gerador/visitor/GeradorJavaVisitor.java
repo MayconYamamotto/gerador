@@ -40,7 +40,7 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
         }
 
         this.basePackage = packageNameBuilder.toString();
-        System.out.println("Processando pacote: " + this.basePackage);
+        System.out.println("\nProcessando pacote: " + this.basePackage);
 
         // Visit all entities in this package
         for (ProjetoDSLParser.EntityDeclContext entityCtx : ctx.entityDecl()) {

@@ -14,7 +14,7 @@ rm -rf "$SRC_DIR/.antlr"
 find "$SRC_DIR" -name "ProjetoDSL*.java" -not -name "ProjetoDSL.g4" -delete 2>/dev/null || true
 
 # Comando de geração
-echo "⚙️ Executando ANTLR..."
+echo "⚙️  Executando ANTLR..."
 java -jar "$ANTLR_JAR" -Dlanguage=Java -visitor -o "$SRC_DIR" "$SRC_DIR/ProjetoDSL.g4"
 
 if [ $? -eq 0 ]; then

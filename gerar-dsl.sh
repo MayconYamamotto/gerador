@@ -19,6 +19,7 @@ echo "📄 Processando arquivo: $DSL_FILE"
 java -cp "target/classes;lib/antlr-4.13.2-complete.jar" br.com.gerador.Main "$DSL_FILE"
 
 if [ $? -eq 0 ]; then
+    echo ""
     echo "✅ Código gerado com sucesso!"
     echo "📁 Verifique os arquivos em: target/generated-sources/"
 else
