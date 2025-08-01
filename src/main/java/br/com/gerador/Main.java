@@ -10,12 +10,14 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        CharStream input = CharStreams.fromFileName("src/main/java/br/com/gerador/dsl/Teste.dsl");
+        String fileName = args.length > 0 ? args[0] : "src/main/java/br/com/gerador/dsl/Teste.dsl";
+
+        CharStream input = CharStreams.fromFileName(fileName);
         ProjetoDSLLexer lexer = new ProjetoDSLLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ProjetoDSLParser parser = new ProjetoDSLParser(tokens);
 
-        ParseTree tree = parser.file(); // ou parser.serviceDecl()
+        ParseTree tree = parser.file();
 
         GeradorJavaVisitor visitor = new GeradorJavaVisitor();
         visitor.visit(tree);

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
-    private static final String BASE_PACKAGE = "br.com.gerador.generated";
+    private String basePackage;
     private final JavaEntityGenerator entityGenerator;
     private final List<EntityModel> entities;
 
@@ -27,11 +27,22 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
     }
 
     @Override
-    public Void visitServiceDecl(ProjetoDSLParser.ServiceDeclContext ctx) {
-        String serviceName = ctx.ID().getText();
-        System.out.println("Processando serviço: " + serviceName);
+    public Void visitPackageDecl(ProjetoDSLParser.PackageDeclContext ctx) {
+        // Extrair o nome do pacote
+        StringBuilder packageNameBuilder = new StringBuilder();
+        ProjetoDSLParser.PackageNameContext packageNameCtx = ctx.packageName();
 
-        // Visit all entities in this service
+        for (int i = 0; i < packageNameCtx.ID().size(); i++) {
+            if (i > 0) {
+                packageNameBuilder.append(".");
+            }
+            packageNameBuilder.append(packageNameCtx.ID(i).getText());
+        }
+
+        this.basePackage = packageNameBuilder.toString();
+        System.out.println("Processando pacote: " + this.basePackage);
+
+        // Visit all entities in this package
         for (ProjetoDSLParser.EntityDeclContext entityCtx : ctx.entityDecl()) {
             visitEntityDecl(entityCtx);
         }
@@ -44,7 +55,9 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
         String entityName = ctx.ID().getText();
         System.out.println("Processando entidade: " + entityName);
 
-        EntityModel entity = new EntityModel(entityName, BASE_PACKAGE);
+        // Usar o package base + .entity para as entidades
+        String entityPackage = this.basePackage + ".entity";
+        EntityModel entity = new EntityModel(entityName, entityPackage);
 
         // Process fields
         if (ctx.fieldDecl() != null) {
@@ -116,13 +129,17 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
         try {
             String generatedCode = entityGenerator.generateEntity(entity);
 
-            Path path = Paths.get("target/generated-sources/" + entity.getName() + ".java");
+            // Converter o package em caminho de diretórios
+            String packagePath = entity.getPackageName().replace(".", "/");
+            Path path = Paths.get("target/generated-sources/" + packagePath + "/" + entity.getName() + ".java");
+
+            // Criar diretórios se não existirem
             Files.createDirectories(path.getParent());
             Files.write(path, generatedCode.getBytes(StandardCharsets.UTF_8));
 
-            System.out.println("✅ Arquivo " + entity.getName() + ".java gerado com sucesso!");
+            System.out.println("Arquivo " + entity.getName() + ".java gerado com sucesso em: " + path);
         } catch (IOException e) {
-            System.err.println("❌ Erro ao gerar arquivo " + entity.getName() + ".java: " + e.getMessage());
+            System.err.println("Erro ao gerar arquivo " + entity.getName() + ".java: " + e.getMessage());
             e.printStackTrace();
         }
     }

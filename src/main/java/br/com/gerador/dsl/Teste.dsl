@@ -1,6 +1,6 @@
-package cliente {
+package br.com.projetoX {
 
-  entity Pessoa {
+  entity Cliente {
     id: uuid
     nome: string
     email: string?
@@ -11,16 +11,20 @@ package cliente {
     criadoEm: datetime
   }
 
-  entity Caixa {
+  entity Produto {
     id: uuid
-    dataAbertura: datetime
-    dataFechamento: datetime?
-    valorAbertura: decimal
-    valorFechamento: decimal?
+    nome: string
+    preco: decimal
+    categoria: string
+    ativo: boolean
+    criadoEm: datetime
   }
 
-  entity Paulinha {
+  entity Pedido {
   id: uuid
-  nome: string
+  numero: string
+  valor: decimal
+  status: string
+  criadoEm: datetime
   }
 }

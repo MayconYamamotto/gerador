@@ -6,7 +6,9 @@ package br.com.gerador.grammar;
 
 file: packageDecl+;
 
-packageDecl: 'package' ID '{' entityDecl+ '}';
+packageDecl: 'package' packageName '{' entityDecl+ '}';
+
+packageName: ID ('.' ID)*;
 
 entityDecl: 'entity' ID '{' fieldDecl+ '}';
 
