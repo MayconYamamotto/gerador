@@ -4,9 +4,9 @@ grammar ProjetoDSL;
 package br.com.gerador.grammar;
 }
 
-file: serviceDecl+;
+file: packageDecl+;
 
-serviceDecl: 'service' ID '{' entityDecl+ '}';
+packageDecl: 'package' ID '{' entityDecl+ '}';
 
 entityDecl: 'entity' ID '{' fieldDecl+ '}';
 

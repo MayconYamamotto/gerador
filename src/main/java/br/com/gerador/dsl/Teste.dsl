@@ -1,21 +1,26 @@
-service cliente {
+package cliente {
+
   entity Pessoa {
     id: uuid
     nome: string
     email: string?
-    idade: integer min(18, "Idade mínima {} anos")
+    idade: integer
     salario: decimal
     ativo: boolean
     dataNascimento: date
     criadoEm: datetime
   }
-  
-  entity Endereco {
+
+  entity Caixa {
     id: uuid
-    rua: string
-    numero: integer
-    cidade: string
-    cep: string
-    pessoaId: uuid
+    dataAbertura: datetime
+    dataFechamento: datetime?
+    valorAbertura: decimal
+    valorFechamento: decimal?
+  }
+
+  entity Paulinha {
+  id: uuid
+  nome: string
   }
 }

@@ -1,11 +1,11 @@
 package br.com.gerador.visitor;
 
+import br.com.gerador.generator.JavaEntityGenerator;
 import br.com.gerador.grammar.ProjetoDSLBaseVisitor;
 import br.com.gerador.grammar.ProjetoDSLParser;
 import br.com.gerador.model.EntityModel;
 import br.com.gerador.model.FieldModel;
 import br.com.gerador.model.ValidationModel;
-import br.com.gerador.generator.JavaEntityGenerator;
 import br.com.gerador.util.TypeMapper;
 
 import java.io.IOException;
@@ -125,9 +125,5 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
             System.err.println("❌ Erro ao gerar arquivo " + entity.getName() + ".java: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    public List<EntityModel> getGeneratedEntities() {
-        return new ArrayList<>(entities);
     }
 }
