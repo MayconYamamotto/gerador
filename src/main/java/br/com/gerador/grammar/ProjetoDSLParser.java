@@ -24,18 +24,18 @@ public class ProjetoDSLParser extends Parser {
 		T__17=18, T__18=19, T__19=20, T__20=21, ID=22, INT=23, STRING=24, WS=25, 
 		COMMENT=26;
 	public static final int
-		RULE_file = 0, RULE_serviceDecl = 1, RULE_entityDecl = 2, RULE_fieldDecl = 3, 
+		RULE_file = 0, RULE_packageDecl = 1, RULE_entityDecl = 2, RULE_fieldDecl = 3, 
 		RULE_type = 4, RULE_option = 5, RULE_validation = 6;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"file", "serviceDecl", "entityDecl", "fieldDecl", "type", "option", "validation"
+			"file", "packageDecl", "entityDecl", "fieldDecl", "type", "option", "validation"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'service'", "'{'", "'}'", "'entity'", "':'", "'string'", "'uuid'", 
+			null, "'package'", "'{'", "'}'", "'entity'", "':'", "'string'", "'uuid'", 
 			"'integer'", "'long'", "'double'", "'boolean'", "'date'", "'datetime'", 
 			"'decimal'", "'?'", "'min('", "','", "')'", "'max('", "'notNull'", "'notBlank'"
 		};
@@ -101,11 +101,11 @@ public class ProjetoDSLParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class FileContext extends ParserRuleContext {
-		public List<ServiceDeclContext> serviceDecl() {
-			return getRuleContexts(ServiceDeclContext.class);
+		public List<PackageDeclContext> packageDecl() {
+			return getRuleContexts(PackageDeclContext.class);
 		}
-		public ServiceDeclContext serviceDecl(int i) {
-			return getRuleContext(ServiceDeclContext.class,i);
+		public PackageDeclContext packageDecl(int i) {
+			return getRuleContext(PackageDeclContext.class,i);
 		}
 		public FileContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -140,7 +140,7 @@ public class ProjetoDSLParser extends Parser {
 				{
 				{
 				setState(14);
-				serviceDecl();
+				packageDecl();
 				}
 				}
 				setState(17); 
@@ -161,7 +161,7 @@ public class ProjetoDSLParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ServiceDeclContext extends ParserRuleContext {
+	public static class PackageDeclContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(ProjetoDSLParser.ID, 0); }
 		public List<EntityDeclContext> entityDecl() {
 			return getRuleContexts(EntityDeclContext.class);
@@ -169,28 +169,28 @@ public class ProjetoDSLParser extends Parser {
 		public EntityDeclContext entityDecl(int i) {
 			return getRuleContext(EntityDeclContext.class,i);
 		}
-		public ServiceDeclContext(ParserRuleContext parent, int invokingState) {
+		public PackageDeclContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_serviceDecl; }
+		@Override public int getRuleIndex() { return RULE_packageDecl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterServiceDecl(this);
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterPackageDecl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitServiceDecl(this);
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitPackageDecl(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitServiceDecl(this);
+			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitPackageDecl(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ServiceDeclContext serviceDecl() throws RecognitionException {
-		ServiceDeclContext _localctx = new ServiceDeclContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_serviceDecl);
+	public final PackageDeclContext packageDecl() throws RecognitionException {
+		PackageDeclContext _localctx = new PackageDeclContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_packageDecl);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);

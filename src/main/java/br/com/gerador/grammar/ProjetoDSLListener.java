@@ -20,15 +20,15 @@ public interface ProjetoDSLListener extends ParseTreeListener {
 	 */
 	void exitFile(ProjetoDSLParser.FileContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProjetoDSLParser#serviceDecl}.
+	 * Enter a parse tree produced by {@link ProjetoDSLParser#packageDecl}.
 	 * @param ctx the parse tree
 	 */
-	void enterServiceDecl(ProjetoDSLParser.ServiceDeclContext ctx);
+	void enterPackageDecl(ProjetoDSLParser.PackageDeclContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProjetoDSLParser#serviceDecl}.
+	 * Exit a parse tree produced by {@link ProjetoDSLParser#packageDecl}.
 	 * @param ctx the parse tree
 	 */
-	void exitServiceDecl(ProjetoDSLParser.ServiceDeclContext ctx);
+	void exitPackageDecl(ProjetoDSLParser.PackageDeclContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProjetoDSLParser#entityDecl}.
 	 * @param ctx the parse tree

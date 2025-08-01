@@ -31,13 +31,13 @@ public class ProjetoDSLBaseListener implements ProjetoDSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterServiceDecl(ProjetoDSLParser.ServiceDeclContext ctx) { }
+	@Override public void enterPackageDecl(ProjetoDSLParser.PackageDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitServiceDecl(ProjetoDSLParser.ServiceDeclContext ctx) { }
+	@Override public void exitPackageDecl(ProjetoDSLParser.PackageDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

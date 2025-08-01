@@ -42,7 +42,7 @@ public class ProjetoDSLLexer extends Lexer {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'service'", "'{'", "'}'", "'entity'", "':'", "'string'", "'uuid'", 
+			null, "'package'", "'{'", "'}'", "'entity'", "':'", "'string'", "'uuid'", 
 			"'integer'", "'long'", "'double'", "'boolean'", "'date'", "'datetime'", 
 			"'decimal'", "'?'", "'min('", "','", "')'", "'max('", "'notNull'", "'notBlank'"
 		};
@@ -175,9 +175,9 @@ public class ProjetoDSLLexer extends Lexer {
 		"\u0000%\u0093\u0001\u0000\u0000\u0000\'\u0098\u0001\u0000\u0000\u0000"+
 		")\u00a0\u0001\u0000\u0000\u0000+\u00a9\u0001\u0000\u0000\u0000-\u00b1"+
 		"\u0001\u0000\u0000\u0000/\u00b5\u0001\u0000\u0000\u00001\u00c1\u0001\u0000"+
-		"\u0000\u00003\u00c7\u0001\u0000\u0000\u000056\u0005s\u0000\u000067\u0005"+
-		"e\u0000\u000078\u0005r\u0000\u000089\u0005v\u0000\u00009:\u0005i\u0000"+
-		"\u0000:;\u0005c\u0000\u0000;<\u0005e\u0000\u0000<\u0002\u0001\u0000\u0000"+
+		"\u0000\u00003\u00c7\u0001\u0000\u0000\u000056\u0005p\u0000\u000067\u0005"+
+		"a\u0000\u000078\u0005c\u0000\u000089\u0005k\u0000\u00009:\u0005a\u0000"+
+		"\u0000:;\u0005g\u0000\u0000;<\u0005e\u0000\u0000<\u0002\u0001\u0000\u0000"+
 		"\u0000=>\u0005{\u0000\u0000>\u0004\u0001\u0000\u0000\u0000?@\u0005}\u0000"+
 		"\u0000@\u0006\u0001\u0000\u0000\u0000AB\u0005e\u0000\u0000BC\u0005n\u0000"+
 		"\u0000CD\u0005t\u0000\u0000DE\u0005i\u0000\u0000EF\u0005t\u0000\u0000"+

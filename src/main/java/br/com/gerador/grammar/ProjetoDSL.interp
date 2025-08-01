@@ -1,6 +1,6 @@
 token literal names:
 null
-'service'
+'package'
 '{'
 '}'
 'entity'
@@ -58,7 +58,7 @@ COMMENT
 
 rule names:
 file
-serviceDecl
+packageDecl
 entityDecl
 fieldDecl
 type

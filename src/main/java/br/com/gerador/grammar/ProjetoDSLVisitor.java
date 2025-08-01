@@ -19,11 +19,11 @@ public interface ProjetoDSLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFile(ProjetoDSLParser.FileContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ProjetoDSLParser#serviceDecl}.
+	 * Visit a parse tree produced by {@link ProjetoDSLParser#packageDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitServiceDecl(ProjetoDSLParser.ServiceDeclContext ctx);
+	T visitPackageDecl(ProjetoDSLParser.PackageDeclContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ProjetoDSLParser#entityDecl}.
 	 * @param ctx the parse tree
