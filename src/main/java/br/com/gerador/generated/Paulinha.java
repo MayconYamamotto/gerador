@@ -10,12 +10,12 @@ import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "endereco")
+@Table(name = "paulinha")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Endereco {
+public class Paulinha {
 
     @Column(name = "id", nullable = false)
     @Id
@@ -23,19 +23,7 @@ public class Endereco {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    @Column(name = "rua", nullable = false)
-    private String rua;
-
-    @Column(name = "numero", nullable = false)
-    private Integer numero;
-
-    @Column(name = "cidade", nullable = false)
-    private String cidade;
-
-    @Column(name = "cep", nullable = false)
-    private String cep;
-
-    @Column(name = "pessoaid", nullable = false)
-    private UUID pessoaId;
+    @Column(name = "nome", nullable = false)
+    private String nome;
 
 }

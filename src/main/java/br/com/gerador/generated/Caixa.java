@@ -3,7 +3,6 @@ package br.com.gerador.generated;
 import java.math.BigDecimal;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
-import java.time.LocalDate;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -13,12 +12,12 @@ import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "pessoa")
+@Table(name = "caixa")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Pessoa {
+public class Caixa {
 
     @Column(name = "id", nullable = false)
     @Id
@@ -26,25 +25,16 @@ public class Pessoa {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    @Column(name = "nome", nullable = false)
-    private String nome;
+    @Column(name = "dataabertura", nullable = false)
+    private LocalDateTime dataAbertura;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "datafechamento")
+    private LocalDateTime dataFechamento;
 
-    @Column(name = "idade", nullable = false)
-    private Integer idade;
+    @Column(name = "valorabertura", nullable = false)
+    private BigDecimal valorAbertura;
 
-    @Column(name = "salario", nullable = false)
-    private BigDecimal salario;
-
-    @Column(name = "ativo", nullable = false)
-    private Boolean ativo;
-
-    @Column(name = "datanascimento", nullable = false)
-    private LocalDate dataNascimento;
-
-    @Column(name = "criadoem", nullable = false)
-    private LocalDateTime criadoEm;
+    @Column(name = "valorfechamento")
+    private BigDecimal valorFechamento;
 
 }
