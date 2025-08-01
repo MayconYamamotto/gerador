@@ -1,4 +1,4 @@
-package br.com.projetoX {
+package br.com.projetoteste {
 
   entity Cliente {
     id: uuid
