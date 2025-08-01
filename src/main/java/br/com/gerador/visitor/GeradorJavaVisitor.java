@@ -116,7 +116,7 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
         try {
             String generatedCode = entityGenerator.generateEntity(entity);
 
-            Path path = Paths.get("src/main/java/br/com/gerador/generated/" + entity.getName() + ".java");
+            Path path = Paths.get("target/generated-sources/" + entity.getName() + ".java");
             Files.createDirectories(path.getParent());
             Files.write(path, generatedCode.getBytes(StandardCharsets.UTF_8));
 
