@@ -196,7 +196,7 @@ endereco: string?    // Campo opcional
 ## 📁 Estrutura de Arquivos Gerada
 
 ```
-target/generated-sources/
+target/generated-sources/java
 └── br/com/[package]/
     ├── domain/
     │   ├── entity/              # Entidades JPA
@@ -312,7 +312,7 @@ package br.com.biblioteca {
    ./build-all.sh exemplos/meu-projeto.dsl
    ```
 
-3. **Verifique os arquivos gerados** em `target/generated-sources/`
+3. **Verifique os arquivos gerados** em `target/generated-sources/java`
 
 4. **Copie os arquivos** para seu projeto Spring Boot
 

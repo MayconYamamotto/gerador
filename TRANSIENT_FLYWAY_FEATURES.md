@@ -121,7 +121,7 @@ CREATE TABLE usuario (
    ```
 
 3. **Verificar os arquivos gerados**:
-   - **Entidades**: `target/generated-sources/{package}/domain/entity/`
+   - **Entidades**: `target/generated-sources/java/{package}/domain/entity/`
    - **Migrações**: `target/generated-sources/src/main/resources/db/migration/`
 
 ## ✨ Benefícios

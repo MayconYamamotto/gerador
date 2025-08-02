@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
+    private static final String GENERATED_SOURCES_DIR = "target/generated-sources/src/main/java/";
+
     private String basePackage;
     private final JavaEntityGenerator entityGenerator;
     private final RepositoryGenerator repositoryGenerator;
@@ -222,7 +224,7 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
 
             // Converter o package em caminho de diretórios
             String packagePath = entity.getPackageName().replace(".", "/");
-            Path path = Paths.get("target/generated-sources/" + packagePath + "/" + entity.getName() + ".java");
+            Path path = Paths.get(GENERATED_SOURCES_DIR + packagePath + "/" + entity.getName() + ".java");
 
             // Criar diretórios se não existirem
             Files.createDirectories(path.getParent());
@@ -241,7 +243,7 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
 
             String packagePath = (this.basePackage + ".domain.repository").replace(".", "/");
             Path path = Paths
-                    .get("target/generated-sources/" + packagePath + "/" + entity.getName() + "Repository.java");
+                    .get(GENERATED_SOURCES_DIR + packagePath + "/" + entity.getName() + "Repository.java");
 
             Files.createDirectories(path.getParent());
             Files.write(path, generatedCode.getBytes(StandardCharsets.UTF_8));
@@ -259,7 +261,7 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
             String createDtoCode = dtoGenerator.generateCreateDto(entity, this.basePackage);
             String packagePath = (this.basePackage + ".application.dto").replace(".", "/");
             Path createDtoPath = Paths
-                    .get("target/generated-sources/" + packagePath + "/Create" + entity.getName() + "Dto.java");
+                    .get(GENERATED_SOURCES_DIR + packagePath + "/Create" + entity.getName() + "Dto.java");
 
             Files.createDirectories(createDtoPath.getParent());
             Files.write(createDtoPath, createDtoCode.getBytes(StandardCharsets.UTF_8));
@@ -268,7 +270,7 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
             // Generate Update DTO
             String updateDtoCode = dtoGenerator.generateUpdateDto(entity, this.basePackage);
             Path updateDtoPath = Paths
-                    .get("target/generated-sources/" + packagePath + "/Update" + entity.getName() + "Dto.java");
+                    .get(GENERATED_SOURCES_DIR + packagePath + "/Update" + entity.getName() + "Dto.java");
 
             Files.write(updateDtoPath, updateDtoCode.getBytes(StandardCharsets.UTF_8));
             System.out.println("Update" + entity.getName() + "Dto.java gerado com sucesso");
@@ -276,7 +278,7 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
             // Generate Response DTO
             String responseDtoCode = dtoGenerator.generateResponseDto(entity, this.basePackage);
             Path responseDtoPath = Paths
-                    .get("target/generated-sources/" + packagePath + "/" + entity.getName() + "ResponseDto.java");
+                    .get(GENERATED_SOURCES_DIR + packagePath + "/" + entity.getName() + "ResponseDto.java");
 
             Files.write(responseDtoPath, responseDtoCode.getBytes(StandardCharsets.UTF_8));
             System.out.println(entity.getName() + "ResponseDto.java gerado com sucesso");
@@ -292,7 +294,8 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
             String generatedCode = serviceGenerator.generateService(entity, this.basePackage);
 
             String packagePath = (this.basePackage + ".application.service").replace(".", "/");
-            Path path = Paths.get("target/generated-sources/" + packagePath + "/" + entity.getName() + "Service.java");
+            Path path = Paths
+                    .get(GENERATED_SOURCES_DIR + packagePath + "/" + entity.getName() + "Service.java");
 
             Files.createDirectories(path.getParent());
             Files.write(path, generatedCode.getBytes(StandardCharsets.UTF_8));
@@ -310,7 +313,7 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
 
             String packagePath = (this.basePackage + ".interfaces.controller").replace(".", "/");
             Path path = Paths
-                    .get("target/generated-sources/" + packagePath + "/" + entity.getName() + "Controller.java");
+                    .get(GENERATED_SOURCES_DIR + packagePath + "/" + entity.getName() + "Controller.java");
 
             Files.createDirectories(path.getParent());
             Files.write(path, generatedCode.getBytes(StandardCharsets.UTF_8));
