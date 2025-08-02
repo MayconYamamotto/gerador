@@ -1,7 +1,7 @@
 package br.com.gerador;
 
-import br.com.gerador.grammar.ProjetoDSLLexer;
-import br.com.gerador.grammar.ProjetoDSLParser;
+import br.com.gerador.grammar.antlr4.ProjetoDSLLexer;
+import br.com.gerador.grammar.antlr4.ProjetoDSLParser;
 import br.com.gerador.visitor.GeradorJavaVisitor;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;

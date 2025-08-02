@@ -1,7 +1,7 @@
 grammar ProjetoDSL;
 
 @header {
-package br.com.gerador.grammar;
+package br.com.gerador.grammar.antlr4;
 }
 
 file: packageDecl+;

@@ -5,20 +5,26 @@ echo "🔧 Gerando arquivos ANTLR..."
 # Caminho do jar
 ANTLR_JAR="lib/antlr-4.13.2-complete.jar"
 
-# Diretório base
-SRC_DIR="src/main/java/br/com/gerador/grammar"
+# Diretórios
+GRAMMAR_DIR="src/main/java/br/com/gerador/grammar"
+OUTPUT_DIR="src/main/java/br/com/gerador/grammar/antlr4"
+
+# Criar diretório de saída se não existir
+mkdir -p "$OUTPUT_DIR"
 
 # Limpar arquivos antigos do ANTLR (se existirem)
 echo "🧹 Limpando arquivos antigos..."
-rm -rf "$SRC_DIR/.antlr"
-find "$SRC_DIR" -name "ProjetoDSL*.java" -not -name "ProjetoDSL.g4" -delete 2>/dev/null || true
+rm -rf "$OUTPUT_DIR"/*.java
+rm -rf "$GRAMMAR_DIR/.antlr"
 
 # Comando de geração
 echo "⚙️  Executando ANTLR..."
-java -jar "$ANTLR_JAR" -Dlanguage=Java -visitor -o "$SRC_DIR" "$SRC_DIR/ProjetoDSL.g4"
+java -jar "$ANTLR_JAR" -Dlanguage=Java -visitor -o "$OUTPUT_DIR" "$GRAMMAR_DIR/ProjetoDSL.g4"
 
 if [ $? -eq 0 ]; then
-    echo "✅ Arquivos ANTLR gerados com sucesso em: $SRC_DIR"
+    echo "✅ Arquivos ANTLR gerados com sucesso em: $OUTPUT_DIR"
+    echo "📂 Para que o Maven reconheça os arquivos, adicione o diretório ao classpath:"
+    echo "   src/main/java/br/com/gerador/grammar/antlr4"
 else
     echo "❌ Erro ao gerar arquivos ANTLR"
     exit 1

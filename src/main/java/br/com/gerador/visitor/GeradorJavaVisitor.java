@@ -1,8 +1,8 @@
 package br.com.gerador.visitor;
 
 import br.com.gerador.generator.*;
-import br.com.gerador.grammar.ProjetoDSLBaseVisitor;
-import br.com.gerador.grammar.ProjetoDSLParser;
+import br.com.gerador.grammar.antlr4.ProjetoDSLBaseVisitor;
+import br.com.gerador.grammar.antlr4.ProjetoDSLParser;
 import br.com.gerador.model.CrudConfigModel;
 import br.com.gerador.model.EntityModel;
 import br.com.gerador.model.FieldModel;

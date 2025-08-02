@@ -1,6 +1,6 @@
 // Generated from src/main/java/br/com/gerador/grammar/ProjetoDSL.g4 by ANTLR 4.13.2
 
-package br.com.gerador.grammar;
+package br.com.gerador.grammar.antlr4;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 

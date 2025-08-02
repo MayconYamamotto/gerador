@@ -1,6 +1,6 @@
-// Generated from c:/workspace/gerador/src/main/java/br/com/gerador/grammar/ProjetoDSL.g4 by ANTLR 4.13.1
+// Generated from src/main/java/br/com/gerador/grammar/ProjetoDSL.g4 by ANTLR 4.13.2
 
-package br.com.gerador.grammar;
+package br.com.gerador.grammar.antlr4;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
 public class ProjetoDSLParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.13.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -117,6 +117,19 @@ public class ProjetoDSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_file; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterFile(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitFile(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitFile(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FileContext file() throws RecognitionException {
@@ -174,6 +187,19 @@ public class ProjetoDSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_packageDecl; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterPackageDecl(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitPackageDecl(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitPackageDecl(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final PackageDeclContext packageDecl() throws RecognitionException {
@@ -242,6 +268,19 @@ public class ProjetoDSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_packageName; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterPackageName(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitPackageName(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitPackageName(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final PackageNameContext packageName() throws RecognitionException {
@@ -295,6 +334,19 @@ public class ProjetoDSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_entityDecl; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterEntityDecl(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitEntityDecl(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitEntityDecl(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final EntityDeclContext entityDecl() throws RecognitionException {
@@ -351,6 +403,19 @@ public class ProjetoDSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_crudConfig; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterCrudConfig(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitCrudConfig(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitCrudConfig(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final CrudConfigContext crudConfig() throws RecognitionException {
@@ -400,6 +465,19 @@ public class ProjetoDSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_crudOptions; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterCrudOptions(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitCrudOptions(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitCrudOptions(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final CrudOptionsContext crudOptions() throws RecognitionException {
@@ -495,6 +573,19 @@ public class ProjetoDSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_fieldDecl; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterFieldDecl(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitFieldDecl(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitFieldDecl(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FieldDeclContext fieldDecl() throws RecognitionException {
@@ -549,6 +640,19 @@ public class ProjetoDSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_type; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterType(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitType(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final TypeContext type() throws RecognitionException {
@@ -587,6 +691,19 @@ public class ProjetoDSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_option; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterOption(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitOption(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitOption(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final OptionContext option() throws RecognitionException {
@@ -618,6 +735,19 @@ public class ProjetoDSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_validation; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).enterValidation(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoDSLListener ) ((ProjetoDSLListener)listener).exitValidation(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjetoDSLVisitor ) return ((ProjetoDSLVisitor<? extends T>)visitor).visitValidation(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ValidationContext validation() throws RecognitionException {
