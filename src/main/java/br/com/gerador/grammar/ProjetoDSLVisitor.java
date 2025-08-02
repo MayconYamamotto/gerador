@@ -37,6 +37,18 @@ public interface ProjetoDSLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitEntityDecl(ProjetoDSLParser.EntityDeclContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ProjetoDSLParser#crudConfig}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCrudConfig(ProjetoDSLParser.CrudConfigContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProjetoDSLParser#crudOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCrudOptions(ProjetoDSLParser.CrudOptionsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProjetoDSLParser#fieldDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -1,8 +1,9 @@
 package br.com.gerador.visitor;
 
-import br.com.gerador.generator.JavaEntityGenerator;
+import br.com.gerador.generator.*;
 import br.com.gerador.grammar.ProjetoDSLBaseVisitor;
 import br.com.gerador.grammar.ProjetoDSLParser;
+import br.com.gerador.model.CrudConfigModel;
 import br.com.gerador.model.EntityModel;
 import br.com.gerador.model.FieldModel;
 import br.com.gerador.model.ValidationModel;
@@ -19,11 +20,21 @@ import java.util.List;
 public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
     private String basePackage;
     private final JavaEntityGenerator entityGenerator;
+    private final RepositoryGenerator repositoryGenerator;
+    private final DtoGenerator dtoGenerator;
+    private final ServiceGenerator serviceGenerator;
+    private final ControllerGenerator controllerGenerator;
     private final List<EntityModel> entities;
+    private CrudConfigModel crudConfig;
 
     public GeradorJavaVisitor() {
         this.entityGenerator = new JavaEntityGenerator();
+        this.repositoryGenerator = new RepositoryGenerator();
+        this.dtoGenerator = new DtoGenerator();
+        this.serviceGenerator = new ServiceGenerator();
+        this.controllerGenerator = new ControllerGenerator();
         this.entities = new ArrayList<>();
+        this.crudConfig = new CrudConfigModel(); // Default configuration
     }
 
     @Override
@@ -42,9 +53,50 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
         this.basePackage = packageNameBuilder.toString();
         System.out.println("\nProcessando pacote: " + this.basePackage);
 
+        // Process CRUD configurations first
+        if (ctx.crudConfig() != null) {
+            for (ProjetoDSLParser.CrudConfigContext crudCtx : ctx.crudConfig()) {
+                visitCrudConfig(crudCtx);
+            }
+        }
+
         // Visit all entities in this package
         for (ProjetoDSLParser.EntityDeclContext entityCtx : ctx.entityDecl()) {
             visitEntityDecl(entityCtx);
+        }
+
+        return null;
+    }
+
+    public Void visitCrudConfig(ProjetoDSLParser.CrudConfigContext ctx) {
+        System.out.println("Processando configuração de CRUD");
+
+        if (ctx.crudOptions() != null) {
+            for (ProjetoDSLParser.CrudOptionsContext option : ctx.crudOptions()) {
+                String optionText = option.getText();
+
+                if (optionText.contains("generateRepository")) {
+                    boolean value = optionText.contains("true");
+                    this.crudConfig.setGenerateRepository(value);
+                    System.out.println("generateRepository: " + value);
+                } else if (optionText.contains("generateService")) {
+                    boolean value = optionText.contains("true");
+                    this.crudConfig.setGenerateService(value);
+                    System.out.println("generateService: " + value);
+                } else if (optionText.contains("generateController")) {
+                    boolean value = optionText.contains("true");
+                    this.crudConfig.setGenerateController(value);
+                    System.out.println("generateController: " + value);
+                } else if (optionText.contains("generateDto")) {
+                    boolean value = optionText.contains("true");
+                    this.crudConfig.setGenerateDto(value);
+                    System.out.println("generateDto: " + value);
+                } else if (optionText.contains("dddLayers")) {
+                    boolean value = optionText.contains("true");
+                    this.crudConfig.setDddLayers(value);
+                    System.out.println("dddLayers: " + value);
+                }
+            }
         }
 
         return null;
@@ -56,7 +108,7 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
         System.out.println("Processando entidade: " + entityName);
 
         // Usar o package base + .entity para as entidades
-        String entityPackage = this.basePackage + ".entity";
+        String entityPackage = this.basePackage + ".domain.entity";
         EntityModel entity = new EntityModel(entityName, entityPackage);
 
         // Process fields
@@ -68,9 +120,40 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
         }
 
         entities.add(entity);
-        generateEntityFile(entity);
+
+        // Generate all CRUD components based on configuration
+        generateCrudComponents(entity);
 
         return null;
+    }
+
+    private void generateCrudComponents(EntityModel entity) {
+        // Always generate the entity
+        generateEntityFile(entity);
+
+        if (crudConfig.isDddLayers()) {
+            System.out.println("Gerando componentes DDD para " + entity.getName());
+
+            // Generate Repository Interface (Domain Layer)
+            if (crudConfig.isGenerateRepository()) {
+                generateRepositoryInterface(entity);
+            }
+
+            // Generate DTOs (Application Layer)
+            if (crudConfig.isGenerateDto()) {
+                generateDtos(entity);
+            }
+
+            // Generate Service (Application Layer)
+            if (crudConfig.isGenerateService()) {
+                generateService(entity);
+            }
+
+            // Generate Controller (Interface Layer)
+            if (crudConfig.isGenerateController()) {
+                generateController(entity);
+            }
+        }
     }
 
     private FieldModel processField(ProjetoDSLParser.FieldDeclContext fieldCtx) {
@@ -140,6 +223,93 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
             System.out.println("Arquivo " + entity.getName() + ".java gerado com sucesso em: " + path);
         } catch (IOException e) {
             System.err.println("Erro ao gerar arquivo " + entity.getName() + ".java: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void generateRepositoryInterface(EntityModel entity) {
+        try {
+            String generatedCode = repositoryGenerator.generateRepositoryInterface(entity, this.basePackage);
+
+            String packagePath = (this.basePackage + ".domain.repository").replace(".", "/");
+            Path path = Paths
+                    .get("target/generated-sources/" + packagePath + "/" + entity.getName() + "Repository.java");
+
+            Files.createDirectories(path.getParent());
+            Files.write(path, generatedCode.getBytes(StandardCharsets.UTF_8));
+
+            System.out.println("Repository " + entity.getName() + "Repository.java gerado com sucesso em: " + path);
+        } catch (IOException e) {
+            System.err.println("Erro ao gerar repository " + entity.getName() + "Repository.java: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void generateDtos(EntityModel entity) {
+        try {
+            // Generate Create DTO
+            String createDtoCode = dtoGenerator.generateCreateDto(entity, this.basePackage);
+            String packagePath = (this.basePackage + ".application.dto").replace(".", "/");
+            Path createDtoPath = Paths
+                    .get("target/generated-sources/" + packagePath + "/Create" + entity.getName() + "Dto.java");
+
+            Files.createDirectories(createDtoPath.getParent());
+            Files.write(createDtoPath, createDtoCode.getBytes(StandardCharsets.UTF_8));
+            System.out.println("Create" + entity.getName() + "Dto.java gerado com sucesso");
+
+            // Generate Update DTO
+            String updateDtoCode = dtoGenerator.generateUpdateDto(entity, this.basePackage);
+            Path updateDtoPath = Paths
+                    .get("target/generated-sources/" + packagePath + "/Update" + entity.getName() + "Dto.java");
+
+            Files.write(updateDtoPath, updateDtoCode.getBytes(StandardCharsets.UTF_8));
+            System.out.println("Update" + entity.getName() + "Dto.java gerado com sucesso");
+
+            // Generate Response DTO
+            String responseDtoCode = dtoGenerator.generateResponseDto(entity, this.basePackage);
+            Path responseDtoPath = Paths
+                    .get("target/generated-sources/" + packagePath + "/" + entity.getName() + "ResponseDto.java");
+
+            Files.write(responseDtoPath, responseDtoCode.getBytes(StandardCharsets.UTF_8));
+            System.out.println(entity.getName() + "ResponseDto.java gerado com sucesso");
+
+        } catch (IOException e) {
+            System.err.println("Erro ao gerar DTOs para " + entity.getName() + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void generateService(EntityModel entity) {
+        try {
+            String generatedCode = serviceGenerator.generateService(entity, this.basePackage);
+
+            String packagePath = (this.basePackage + ".application.service").replace(".", "/");
+            Path path = Paths.get("target/generated-sources/" + packagePath + "/" + entity.getName() + "Service.java");
+
+            Files.createDirectories(path.getParent());
+            Files.write(path, generatedCode.getBytes(StandardCharsets.UTF_8));
+
+            System.out.println("Service " + entity.getName() + "Service.java gerado com sucesso em: " + path);
+        } catch (IOException e) {
+            System.err.println("Erro ao gerar service " + entity.getName() + "Service.java: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void generateController(EntityModel entity) {
+        try {
+            String generatedCode = controllerGenerator.generateController(entity, this.basePackage);
+
+            String packagePath = (this.basePackage + ".interfaces.controller").replace(".", "/");
+            Path path = Paths
+                    .get("target/generated-sources/" + packagePath + "/" + entity.getName() + "Controller.java");
+
+            Files.createDirectories(path.getParent());
+            Files.write(path, generatedCode.getBytes(StandardCharsets.UTF_8));
+
+            System.out.println("Controller " + entity.getName() + "Controller.java gerado com sucesso em: " + path);
+        } catch (IOException e) {
+            System.err.println("Erro ao gerar controller " + entity.getName() + "Controller.java: " + e.getMessage());
             e.printStackTrace();
         }
     }

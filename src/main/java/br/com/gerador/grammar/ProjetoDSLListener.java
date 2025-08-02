@@ -50,6 +50,26 @@ public interface ProjetoDSLListener extends ParseTreeListener {
 	 */
 	void exitEntityDecl(ProjetoDSLParser.EntityDeclContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ProjetoDSLParser#crudConfig}.
+	 * @param ctx the parse tree
+	 */
+	void enterCrudConfig(ProjetoDSLParser.CrudConfigContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProjetoDSLParser#crudConfig}.
+	 * @param ctx the parse tree
+	 */
+	void exitCrudConfig(ProjetoDSLParser.CrudConfigContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProjetoDSLParser#crudOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterCrudOptions(ProjetoDSLParser.CrudOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProjetoDSLParser#crudOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitCrudOptions(ProjetoDSLParser.CrudOptionsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProjetoDSLParser#fieldDecl}.
 	 * @param ctx the parse tree
 	 */

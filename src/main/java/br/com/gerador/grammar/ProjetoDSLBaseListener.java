@@ -67,6 +67,30 @@ public class ProjetoDSLBaseListener implements ProjetoDSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCrudConfig(ProjetoDSLParser.CrudConfigContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCrudConfig(ProjetoDSLParser.CrudConfigContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCrudOptions(ProjetoDSLParser.CrudOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCrudOptions(ProjetoDSLParser.CrudOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFieldDecl(ProjetoDSLParser.FieldDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
