@@ -29,14 +29,6 @@ public class RepositoryGenerator {
     sb.append("    @Query(\"SELECT e FROM ").append(entity.getName()).append(" e WHERE e.ativo = true\")\n");
     sb.append("    List<").append(entity.getName()).append("> findAllAtivos();\n\n");
 
-    // Find by name if exists
-    if (hasNameField(entity)) {
-      sb.append("    @Query(\"SELECT e FROM ").append(entity.getName())
-          .append(" e WHERE e.nome LIKE %:nome% AND e.ativo = true\")\n");
-      sb.append("    List<").append(entity.getName())
-          .append("> findByNomeContainingIgnoreCaseAndAtivoTrue(@Param(\"nome\") String nome);\n\n");
-    }
-
     sb.append("    @Query(\"SELECT e FROM ").append(entity.getName())
         .append(" e WHERE e.id = :id AND e.ativo = true\")\n");
     sb.append("    Optional<").append(entity.getName()).append("> findByIdAndAtivoTrue(@Param(\"id\") UUID id);\n\n");
