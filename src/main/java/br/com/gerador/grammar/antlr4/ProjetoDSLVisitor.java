@@ -67,6 +67,12 @@ public interface ProjetoDSLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOption(ProjetoDSLParser.OptionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ProjetoDSLParser#modifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModifier(ProjetoDSLParser.ModifierContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProjetoDSLParser#validation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

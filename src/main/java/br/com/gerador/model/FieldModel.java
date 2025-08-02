@@ -8,6 +8,7 @@ public class FieldModel {
   private String type;
   private String javaType;
   private boolean optional;
+  private boolean transientField;
   private boolean isRelationship;
   private String relationshipType;
   private String targetEntity;
@@ -51,6 +52,14 @@ public class FieldModel {
 
   public void setOptional(boolean optional) {
     this.optional = optional;
+  }
+
+  public boolean isTransientField() {
+    return transientField;
+  }
+
+  public void setTransientField(boolean transientField) {
+    this.transientField = transientField;
   }
 
   public boolean isRelationship() {

@@ -100,6 +100,16 @@ public interface ProjetoDSLListener extends ParseTreeListener {
 	 */
 	void exitOption(ProjetoDSLParser.OptionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ProjetoDSLParser#modifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterModifier(ProjetoDSLParser.ModifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProjetoDSLParser#modifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitModifier(ProjetoDSLParser.ModifierContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProjetoDSLParser#validation}.
 	 * @param ctx the parse tree
 	 */

@@ -22,7 +22,7 @@ crudOptions:
 	| 'generateDto' ':' BOOLEAN
 	| 'dddLayers' ':' BOOLEAN;
 
-fieldDecl: ID ':' type option? validation?;
+fieldDecl: ID ':' type option? validation? modifier?;
 
 type:
 	'string'
@@ -36,6 +36,8 @@ type:
 	| 'decimal';
 
 option: '?';
+
+modifier: 'transient';
 
 validation:
 	'min(' INT ',' STRING ')'

@@ -12,6 +12,38 @@ Um gerador de código que cria automaticamente aplicações Spring Boot seguindo
 - **Busca Avançada**: Métodos de busca customizados
 - **Auditoria**: Campos de criação e atualização automáticos
 - **Transações**: Suporte a transações declarativas
+- **Campos Transient**: Suporte a campos que não são persistidos no banco de dados
+- **Migração Flyway**: Geração automática de scripts de migração de banco de dados
+
+## 🆕 Novas Funcionalidades
+
+### 🔄 Campos Transient
+Agora é possível marcar campos como `transient` na DSL. Esses campos:
+- Não são incluídos nas migrações Flyway
+- São marcados com `@Transient` na entidade JPA
+- Estão disponíveis para uso em tempo de execução/lógica de aplicação
+
+**Exemplo de uso:**
+```yaml
+entity Usuario {
+  id: uuid
+  nome: string notBlank
+  email: string notBlank
+  senha: string transient        // Não persiste no banco
+  ativo: boolean
+  tokenTemp: string? transient   // Campo opcional e transient
+}
+```
+
+### 🗃️ Migração Flyway
+O gerador agora cria automaticamente scripts de migração Flyway que:
+- Refletem a estrutura das entidades definidas na DSL
+- Excluem campos marcados como `transient`
+- Incluem constraints baseadas nas validações definidas
+- Seguem as convenções de nomenclatura do Flyway
+
+**Arquivos gerados:**
+- `src/main/resources/db/migration/V{timestamp}__Create_{table}_table.sql`
 
 ## 🏗️ Arquitetura DDD Gerada
 

@@ -127,6 +127,18 @@ public class ProjetoDSLBaseListener implements ProjetoDSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterModifier(ProjetoDSLParser.ModifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitModifier(ProjetoDSLParser.ModifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterValidation(ProjetoDSLParser.ValidationContext ctx) { }
 	/**
 	 * {@inheritDoc}

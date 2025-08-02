@@ -24,6 +24,7 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
     private final DtoGenerator dtoGenerator;
     private final ServiceGenerator serviceGenerator;
     private final ControllerGenerator controllerGenerator;
+    private final FlywayMigrationGenerator migrationGenerator;
     private final List<EntityModel> entities;
     private CrudConfigModel crudConfig;
 
@@ -33,6 +34,7 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
         this.dtoGenerator = new DtoGenerator();
         this.serviceGenerator = new ServiceGenerator();
         this.controllerGenerator = new ControllerGenerator();
+        this.migrationGenerator = new FlywayMigrationGenerator();
         this.entities = new ArrayList<>();
         this.crudConfig = new CrudConfigModel(); // Default configuration
     }
@@ -131,6 +133,9 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
         // Always generate the entity
         generateEntityFile(entity);
 
+        // Generate Flyway migration
+        generateFlywayMigration(entity);
+
         if (crudConfig.isDddLayers()) {
             System.out.println("Gerando componentes DDD para " + entity.getName());
 
@@ -164,6 +169,9 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
 
         // Check if it's optional
         field.setOptional(fieldCtx.option() != null);
+
+        // Check if it's transient
+        field.setTransientField(fieldCtx.modifier() != null && fieldCtx.modifier().getText().equals("transient"));
 
         // Map the type
         String javaType = TypeMapper.mapType(fieldType);
@@ -310,6 +318,16 @@ public class GeradorJavaVisitor extends ProjetoDSLBaseVisitor<Void> {
             System.out.println("Controller " + entity.getName() + "Controller.java gerado com sucesso em: " + path);
         } catch (IOException e) {
             System.err.println("Erro ao gerar controller " + entity.getName() + "Controller.java: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void generateFlywayMigration(EntityModel entity) {
+        try {
+            System.out.println("Gerando migração Flyway para " + entity.getName());
+            migrationGenerator.generateMigration(entity, "target/generated-sources");
+        } catch (Exception e) {
+            System.err.println("Erro ao gerar migração Flyway para " + entity.getName() + ": " + e.getMessage());
             e.printStackTrace();
         }
     }

@@ -54,28 +54,33 @@ public class JavaEntityGenerator {
   }
 
   private void generateField(StringBuilder sb, FieldModel field) {
-    // JPA annotations for relationships
-    if (field.isRelationship()) {
-      sb.append("    @").append(field.getRelationshipType()).append("\n");
-      if ("OneToMany".equals(field.getRelationshipType()) || "ManyToMany".equals(field.getRelationshipType())) {
-        sb.append("    @JoinColumn(name = \"").append(field.getName().toLowerCase()).append("_id\")\n");
-      }
+    // Check if field is transient and add @Transient annotation
+    if (field.isTransientField()) {
+      sb.append("    @Transient\n");
     } else {
-      // Column annotation for simple fields
-      sb.append("    @Column(name = \"").append(field.getName().toLowerCase()).append("\"");
-      if (!field.isOptional()) {
-        sb.append(", nullable = false");
-      }
-      sb.append(")\n");
+      // JPA annotations for relationships
+      if (field.isRelationship()) {
+        sb.append("    @").append(field.getRelationshipType()).append("\n");
+        if ("OneToMany".equals(field.getRelationshipType()) || "ManyToMany".equals(field.getRelationshipType())) {
+          sb.append("    @JoinColumn(name = \"").append(field.getName().toLowerCase()).append("_id\")\n");
+        }
+      } else {
+        // Column annotation for simple fields
+        sb.append("    @Column(name = \"").append(field.getName().toLowerCase()).append("\"");
+        if (!field.isOptional()) {
+          sb.append(", nullable = false");
+        }
+        sb.append(")\n");
 
-      // Add @Id for id fields
-      if ("id".equals(field.getName().toLowerCase())) {
-        sb.append("    @Id\n");
-        if ("UUID".equals(field.getJavaType())) {
-          sb.append("    @GeneratedValue(generator = \"UUID\")\n");
-          sb.append("    @GenericGenerator(name = \"UUID\", strategy = \"org.hibernate.id.UUIDGenerator\")\n");
-        } else if ("Integer".equals(field.getJavaType()) || "Long".equals(field.getJavaType())) {
-          sb.append("    @GeneratedValue(strategy = GenerationType.IDENTITY)\n");
+        // Add @Id for id fields
+        if ("id".equals(field.getName().toLowerCase())) {
+          sb.append("    @Id\n");
+          if ("UUID".equals(field.getJavaType())) {
+            sb.append("    @GeneratedValue(generator = \"UUID\")\n");
+            sb.append("    @GenericGenerator(name = \"UUID\", strategy = \"org.hibernate.id.UUIDGenerator\")\n");
+          } else if ("Integer".equals(field.getJavaType()) || "Long".equals(field.getJavaType())) {
+            sb.append("    @GeneratedValue(strategy = GenerationType.IDENTITY)\n");
+          }
         }
       }
     }

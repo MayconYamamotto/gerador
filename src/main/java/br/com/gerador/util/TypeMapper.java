@@ -6,6 +6,7 @@ import java.util.Map;
 public class TypeMapper {
   private static final Map<String, String> TYPE_MAPPING = new HashMap<>();
   private static final Map<String, String> IMPORT_MAPPING = new HashMap<>();
+  private static final Map<String, String> SQL_TYPE_MAPPING = new HashMap<>();
 
   static {
     // Tipos primitivos
@@ -19,6 +20,17 @@ public class TypeMapper {
     TYPE_MAPPING.put("datetime", "LocalDateTime");
     TYPE_MAPPING.put("decimal", "BigDecimal");
 
+    // Mapeamento para tipos SQL
+    SQL_TYPE_MAPPING.put("string", "VARCHAR(255)");
+    SQL_TYPE_MAPPING.put("uuid", "UUID");
+    SQL_TYPE_MAPPING.put("integer", "INTEGER");
+    SQL_TYPE_MAPPING.put("long", "BIGINT");
+    SQL_TYPE_MAPPING.put("double", "DOUBLE");
+    SQL_TYPE_MAPPING.put("boolean", "BOOLEAN");
+    SQL_TYPE_MAPPING.put("date", "DATE");
+    SQL_TYPE_MAPPING.put("datetime", "TIMESTAMP");
+    SQL_TYPE_MAPPING.put("decimal", "DECIMAL(19,2)");
+
     // Imports necessários
     IMPORT_MAPPING.put("UUID", "java.util.UUID");
     IMPORT_MAPPING.put("LocalDate", "java.time.LocalDate");
@@ -30,6 +42,10 @@ public class TypeMapper {
 
   public static String mapType(String dslType) {
     return TYPE_MAPPING.getOrDefault(dslType, dslType);
+  }
+
+  public static String mapSqlType(String dslType) {
+    return SQL_TYPE_MAPPING.getOrDefault(dslType, "VARCHAR(255)");
   }
 
   public static String getImport(String javaType) {
