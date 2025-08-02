@@ -335,8 +335,8 @@ package br.com.biblioteca {
 
 ## 📋 Requisitos
 
-- Java 8+
-- Maven 3.6+
+- Java 17+
+- Maven 3.8+
 - ANTLR 4.13.2
 
 ## 🛠️ Tecnologias Utilizadas
