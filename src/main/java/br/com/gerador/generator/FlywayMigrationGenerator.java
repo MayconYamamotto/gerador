@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static br.com.gerador.util.StringUtils.convertToSnakeCase;
+
 public class FlywayMigrationGenerator {
 
   private static final String MIGRATION_TEMPLATE = """
@@ -99,10 +101,6 @@ public class FlywayMigrationGenerator {
 
   private String generateMigrationFileName(String tableName) {
     String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-    return String.format("V%s__Create_%s_table.sql", timestamp, tableName);
-  }
-
-  private String convertToSnakeCase(String camelCase) {
-    return camelCase.replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
+    return String.format("V%s__%s_create_table.sql", timestamp, tableName);
   }
 }

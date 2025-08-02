@@ -8,6 +8,8 @@ import br.com.gerador.util.TypeMapper;
 import java.util.HashSet;
 import java.util.Set;
 
+import static br.com.gerador.util.StringUtils.convertToSnakeCase;
+
 public class JavaEntityGenerator {
 
   public String generateEntity(EntityModel entity) {
@@ -25,7 +27,7 @@ public class JavaEntityGenerator {
 
     // Class annotations
     sb.append("@Entity\n");
-    sb.append("@Table(name = \"").append(entity.getName().toLowerCase()).append("\")\n");
+    sb.append("@Table(name = \"").append(convertToSnakeCase(entity.getName())).append("\")\n");
     sb.append("@Data\n");
     sb.append("@NoArgsConstructor\n");
     sb.append("@AllArgsConstructor\n");
@@ -156,4 +158,5 @@ public class JavaEntityGenerator {
 
     return imports;
   }
+
 }
